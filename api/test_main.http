@@ -1,0 +1,114 @@
+# Test your FastAPI endpoints
+
+###
+# get movies '/movies' test
+GET http://127.0.0.1:8000/movies
+Accept: application/json
+
+###
+# get movie '/movies/{movie_id}' test
+GET http://127.0.0.1:8000/movies/4
+Accept: application/json
+
+###
+# add movie '/movies' test
+POST http://localhost:8000/movies
+Content-Type: application/json
+
+{
+  "title": "Poranek Kojota",
+  "director": "Olaf Lubaszenko",
+  "year": "2001",
+  "description" :"Komedia"
+}
+
+###
+# remove movie '/movies/{movie_id}' test
+DELETE http://127.0.0.1:8000/movies/10
+Accept: application/json
+
+###
+# remove all movies '/movies' test
+DELETE http://127.0.0.1:8000/movies
+Accept: application/json
+
+###
+# update movie '/movies/{movie_id}' test
+PUT http://localhost:8000/movies/9
+Content-Type: application/json
+
+{
+  "title": "Poranek",
+  "director": "Olaf",
+  "year": "2001",
+  "description" :"Komedia dobra"
+}
+
+###
+# update single movie value '/movies/{movie_id}' test
+PATCH http://localhost:8000/movies/9
+Content-Type: application/json
+
+{
+  "title": "Poranek",
+  "year": "2001",
+  "description" :"Komedia"
+}
+
+######################################################################
+
+###
+# get actors '/actors' test
+GET http://127.0.0.1:8000/actors
+Accept: application/json
+
+###
+# get actor '/actors/{actor_id}' test
+GET http://127.0.0.1:8000/actors/3
+Accept: application/json
+
+###
+# add actor '/actors' test
+POST http://127.0.0.1:8000/actors/
+Content-Type: application/json
+
+{
+  "name": "Olaf",
+  "surname": "Lubaszenko"
+}
+
+###
+# remove'/actors/{actor_id}' test
+DELETE http://127.0.0.1:8000/actors/25
+Accept: application/json
+
+###
+#remove all "/actors" test
+DELETE http://127.0.0.1:8000/actors
+Accept: application/json
+
+###
+# Update actor '/actors/{actor_id}'" test
+PUT http://127.0.0.1:8000/actors/22
+Content-Type: application/json
+
+{
+  "name": "Olaf",
+  "surname": "Lubaszenko"
+}
+
+###
+# Update single actor value '/actors/{actor_id}'" test
+PATCH http://127.0.0.1:8000/actors/22
+Content-Type: application/json
+
+{
+  "surname": "Lubas"
+}
+
+######################################################################
+
+###
+# Get actors from movie /movies/{movie_id}/actors test
+GET http://127.0.0.1:8000/movies/4/actors
+Accept: application/json
