@@ -1,14 +1,21 @@
+import { useNavigate } from "react-router-dom";
+
 export default function MovieListItem(props) {
+    const navigate = useNavigate();
     return (
-        <div>
-            <div>
+        <div className ="clickable" onClick={() => navigate(`/movies/${props.movie.id}`)}>
+            <div className="button-movies">
                 <strong>{props.movie.title}</strong>
                 {' '}
                 <span>({props.movie.year})</span>
                 {' '}
                 directed by {props.movie.director}
                 {' '}
-                <a onClick={props.onDelete}>Delete</a>
+                <button onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        props.onDelete();
+                    }}>Delete</button>
             </div>
             {props.movie.description}
         </div>

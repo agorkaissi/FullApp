@@ -40,3 +40,62 @@
 ul.movies-list {
   list-style: none;
 }
+
+ul.actors-list {
+  list-style: none;
+}
+
+header {
+    background-color: #270355;
+    color: white;
+    padding: 1rem 0;
+}
+header h1 {
+    margin: 0;
+    text-align: center;
+}
+main {
+    flex: 1;
+    padding: 2rem;
+}
+footer {
+    background-color: #f2f2f2;
+    color: #6c757d;
+    padding: 1rem 0;
+    text-align: center;
+}
+.container {
+  display: flex;
+  flex-direction:column;
+  gap: 20px;
+}
+
+.box {
+  flex: 1;
+
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.button-group {
+  display: flex;            /* ustawiamy flexbox */
+  justify-content: center;  /* wyśrodkowanie w poziomie */
+  gap: 20px;                /* odstęp między przyciskami */
+  margin-top: 20px;         /* opcjonalnie odstęp od góry */
+}
+
+.button-movies {
+  display: flex;            /* ustawiamy flexbox */
+  justify-content: left;  /* wyśrodkowanie w poziomie */
+  gap: 20px;                /* odstęp między przyciskami */
+  margin-top: 20px;         /* opcjonalnie odstęp od góry */
+}
+
+.clickable {
+    cursor: pointer;
+    text-decoration: none; /* domyślnie brak podkreślenia */
+}
+
+.clickable:hover {
+    text-decoration: underline; /* podkreślenie na hover */
+}
