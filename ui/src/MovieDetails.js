@@ -9,7 +9,7 @@ const MovieDetails = () => {
     const { id } = useParams();
 
     const backMovies = () => {
-        navigate("/movies"); // przejście do movies
+        navigate("/movies");
     };
 
     useEffect(() => {

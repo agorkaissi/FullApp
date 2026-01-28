@@ -110,5 +110,15 @@ Content-Type: application/json
 
 ###
 # Get actors from movie /movies/{movie_id}/actors test
-GET http://127.0.0.1:8000/movies/4/actors
+GET http://127.0.0.1:8000/movies/1/actors
+Accept: application/json
+
+###
+# Add actor to movie /movies/{movie_id}/actors/{actor_id} test
+POST http://127.0.0.1:8000/movies/6/actors/18
+Content-Type: application/json
+
+###
+# remove'/movies/{movie_id}/actors/{actor_id}' test
+DELETE http://127.0.0.1:8000/movies/6/actors/18
 Accept: application/json

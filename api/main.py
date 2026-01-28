@@ -110,3 +110,36 @@ def get_actors_for_movie(movie_id: int, db=Depends(get_db)):
         )
 
     return [row_to_dict(r, ACTOR_FIELDS) for r in rows]
+
+@app.post("/movies/{movie_id}/actors/{actor_id}")
+def add_actor_to_movie(movie_id: int, actor_id: int, db=Depends(get_db)):
+    get_one(db, "movie", movie_id, ["id"], "Movie")
+    get_one(db, "actor", actor_id, ["id"], "Actor")
+
+    existing = db_execute(
+        db,
+        "SELECT 1 FROM movie_actor_through WHERE movie_id=:movie_id AND actor_id=:actor_id",
+        {"movie_id": movie_id, "actor_id": actor_id},
+        fetchone=True
+    )
+    if existing:
+        raise HTTPException(
+            400,
+            "Actor already assigned to this movie"
+        )
+    create(db, "movie_actor_through", {"movie_id": movie_id, "actor_id": actor_id})
+    return {"message": "Actor added to movie", "movie_id": movie_id, "actor_id": actor_id}
+
+@app.delete("/movies/{movie_id}/actors/{actor_id}")
+def remove_actor_from_movie(movie_id: int, actor_id: int, db=Depends(get_db)):
+    cursor = db_execute(
+        db,
+        "DELETE FROM movie_actor_through WHERE movie_id=:movie_id AND actor_id=:actor_id",
+        {"movie_id": movie_id, "actor_id": actor_id}
+    )
+    if cursor.rowcount == 0:
+        raise HTTPException(
+            404,
+            "Actor not assigned to this movie"
+        )
+    return {"message": "Actor removed from movie"}

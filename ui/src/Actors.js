@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState,useEffect } from "react";
 import ActorForm from "./ActorForm";
@@ -10,10 +9,8 @@ const Actors = () => {
     const navigate = useNavigate();
 
     const backHome = () => {
-        navigate("/"); // przejście do Home
+        navigate("/");
     };
-
-
 
     useEffect(() => {
         const fetchActors = async () => {
@@ -27,7 +24,7 @@ const Actors = () => {
     }, []);
 
     async function handleAddActor(actor) {
-        const response = await fetch('/actor', {
+        const response = await fetch('/actors', {
             method: 'POST',
             body: JSON.stringify(actor),
             headers: { 'Content-Type': 'application/json' }
