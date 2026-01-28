@@ -10,7 +10,6 @@ const MovieDetails = () => {
     const {id} = useParams();
     const [isActorListOpen, setIsActorListOpen] = useState(false);
 
-
     const backMovies = () => {
         navigate("/movies");
     };
@@ -98,7 +97,7 @@ const MovieDetails = () => {
                                 id={id}
                                 isOpen={isActorListOpen}
                                 onClose={() => setIsActorListOpen(false)}
-                                onUpdate={refreshActors} // <- nowy props
+                                onUpdate={refreshActors}
                             />
 
                         </div>

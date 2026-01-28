@@ -71,7 +71,7 @@ const Movies = () => {
                             ? <MovieForm onMovieSubmit={handleAddMovie}
                                          buttonLabel="Add a movie"
                             />
-                            : <button onClick={() => setAddingMovie(true)}>Add a movie</button>}
+                            : <button class="button button-outline" onClick={() => setAddingMovie(true)}>Add a movie</button>}
                     </div>
                 </div>
             </main>
