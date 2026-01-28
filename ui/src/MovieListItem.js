@@ -11,7 +11,7 @@ export default function MovieListItem(props) {
                 {' '}
                 directed by {props.movie.director}
                 {' '}
-                <button onClick={(e) => {
+                <button  onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
                         props.onDelete();
