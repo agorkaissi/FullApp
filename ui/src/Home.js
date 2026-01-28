@@ -1,7 +1,4 @@
-import { Link } from "react-router-dom";
 import './App.css';
-import {useState,useEffect} from "react";
-import {Routes, Route} from "react-router-dom";
 import "milligram";
 import { useNavigate } from "react-router-dom";
 
@@ -10,12 +7,6 @@ const Home = () => {
 
     return (
 		<>
-            <header>
-                <div className="container">
-                    <h1>My favourite movie to watch</h1>
-                </div>
-            </header>
-            <main>
                 <div className="container">
                     <div className="box top">
                         <h5>
@@ -30,12 +21,7 @@ const Home = () => {
                           <button onClick={() => navigate("/Actors")}>Actors Base</button>
                     </div>
                 </div>
-            </main>
-            <footer>
-                <div className="container" >
-                    <p>&#169; 2026 My Movie Database. All rights reserved</p>
-                </div>
-            </footer>
+
         </>
   );
 };

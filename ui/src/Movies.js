@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import { useState,useEffect } from "react";
+import {useNavigate} from "react-router-dom";
+import {useState, useEffect} from "react";
 import MovieForm from "./MovieForm";
 import MoviesList from "./MoviesList";
 
@@ -28,7 +28,7 @@ const Movies = () => {
         const response = await fetch('/movies', {
             method: 'POST',
             body: JSON.stringify(movie),
-            headers: { 'Content-Type': 'application/json' }
+            headers: {'Content-Type': 'application/json'}
         });
         if (response.ok) {
             const addingResponse = await response.json();
@@ -49,39 +49,29 @@ const Movies = () => {
 
 
     return (
-		<>
-            <header>
-                <div className="container">
-                    <h1>My favourite movie to watch</h1>
-                </div>
-            </header>
-            <main>
-                <div className="container">
-                    <div className="box top">
-                        <button onClick={backHome}>Back to Home</button>
-                        <h1>Movies Database</h1>
-                    </div>
-                    <div className="box bottom">
-                        {movies.length === 0
-                            ? <p>No movies yet. Maybe add something?</p>
-                            : <MoviesList movies={movies}
-                                          onDeleteMovie={handleDeleteMovie}
-                            />}
-                        {addingMovie
-                            ? <MovieForm onMovieSubmit={handleAddMovie}
-                                         buttonLabel="Add a movie"
-                            />
-                            : <button class="button button-outline" onClick={() => setAddingMovie(true)}>Add a movie</button>}
-                    </div>
-                </div>
-            </main>
-            <footer>
-                <div className="container" >
-                    <p>&#169; 2026 My Movie Database. All rights reserved</p>
-                </div>
-            </footer>
-        </>
-  );
+        <div className="container">
+            <div className="section-header">
+                <button className="back-button" onClick={backHome}>
+                    <span className="back-arrow">←</span>
+                    <span className="back-text">Back</span>
+                </button>
+
+                <h2 className="section-title">Movie database</h2>
+            </div>
+            <div className="box bottom">
+                {movies.length === 0
+                    ? <p>No movies yet. Maybe add something?</p>
+                    : <MoviesList movies={movies}
+                                  onDeleteMovie={handleDeleteMovie}
+                    />}
+                {addingMovie
+                    ? <MovieForm onMovieSubmit={handleAddMovie}
+                                 buttonLabel="Add a movie"
+                    />
+                    : <button class="button button-outline" onClick={() => setAddingMovie(true)}>Add a movie</button>}
+            </div>
+        </div>
+    );
 };
 
 export default Movies;

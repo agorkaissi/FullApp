@@ -10,9 +10,6 @@ const MovieDetails = () => {
     const {id} = useParams();
     const [isActorListOpen, setIsActorListOpen] = useState(false);
 
-    const backMovies = () => {
-        navigate("/movies");
-    };
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -47,69 +44,61 @@ const MovieDetails = () => {
     };
 
     return (
-        <>
-            <header>
-                <div className="container">
-                    <h1>My favourite movie to watch</h1>
-                </div>
-            </header>
-            <main>
-                <div className="container">
-                    <div className="box top">
-                        <button onClick={backMovies}>Back to Movies</button>
-                    </div>
-                    <div className="box bottom">
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Year</th>
-                                <th>Director</th>
-                                <th>Description</th>
-                                <th>Actors</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {movie && (
-                                <tr key={movie.id}>
-                                    <td>{movie.title}</td>
-                                    <td>{movie.year}</td>
-                                    <td>{movie.director}</td>
-                                    <td>{movie.description}</td>
-                                    <td>
-                                        {actors.length > 0
-                                            ? actors.map(a => `${a.name} ${a.surname}`).join(", ")
-                                            : "—"}
-                                    </td>
-                                    <td>
-                                        <button className="button button-outline"
-                                                onClick={() => setIsActorListOpen(true)}>Add Actor
-                                        </button>
-                                    </td>
-                                </tr>
-                            )}
-                            </tbody>
-                        </table>
-                        <div>
+        <div className="container">
+            <div className="section-header">
+                <button className="back-button" onClick={() => navigate(-1)}>
+                    <span className="back-arrow">←</span>
+                    <span className="back-text">Back</span>
+                </button>
 
-                            <MovieActors
-                                id={id}
-                                isOpen={isActorListOpen}
-                                onClose={() => setIsActorListOpen(false)}
-                                onUpdate={refreshActors}
-                            />
+                <h2 className="section-title">Movie Details</h2>
+            </div>
 
-                        </div>
-                    </div>
+            <div className="box bottom">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Year</th>
+                        <th>Director</th>
+                        <th>Description</th>
+                        <th>Actors</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {movie && (
+                        <tr key={movie.id}>
+                            <td>{movie.title}</td>
+                            <td>{movie.year}</td>
+                            <td>{movie.director}</td>
+                            <td>{movie.description}</td>
+                            <td>
+                                {actors.length > 0
+                                    ? actors.map(a => `${a.name} ${a.surname}`).join(", ")
+                                    : "—"}
+                            </td>
+                            <td>
+                                <button className="button button-outline"
+                                        onClick={() => setIsActorListOpen(true)}>Add Actor
+                                </button>
+                            </td>
+                        </tr>
+                    )}
+                    </tbody>
+                </table>
+                <div>
+
+                    <MovieActors
+                        id={id}
+                        isOpen={isActorListOpen}
+                        onClose={() => setIsActorListOpen(false)}
+                        onUpdate={refreshActors}
+                    />
+
                 </div>
-            </main>
-            <footer>
-                <div className="container">
-                    <p>&#169; 2026 My Movie Database. All rights reserved</p>
-                </div>
-            </footer>
-        </>
+            </div>
+        </div>
     );
 };
 
