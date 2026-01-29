@@ -34,7 +34,12 @@ export default function MovieActors({id, isOpen, onClose, onUpdate}) {
         <div>
             <h3>Choose actor</h3>
 
-            {loading && <p>Loading...</p>}
+            {loading && <div className="lds-ellipsis">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>}
 
             {!loading && (
                 <form

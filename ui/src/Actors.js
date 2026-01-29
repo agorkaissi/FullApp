@@ -6,7 +6,9 @@ import ActorsList from "./ActorsList";
 const Actors = () => {
     const [actors, setActors] = useState([]);
     const [addingActor, setAddingActor] = useState(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+
 
     const backHome = () => {
         navigate("/");
@@ -14,13 +16,15 @@ const Actors = () => {
 
     useEffect(() => {
         const fetchActors = async () => {
+            setLoading(true);
             const response = await fetch(`/actors`);
             if (response.ok) {
                 const actors = await response.json();
                 setActors(actors);
             }
         };
-        fetchActors();
+        fetchActors()
+            .finally(() => setLoading(false));
     }, []);
 
     async function handleAddActor(actor) {
@@ -59,17 +63,26 @@ const Actors = () => {
                 <h2 className="section-title">Actors Database</h2>
             </div>
             <div className="box bottom">
-                {actors.length === 0
-                    ? <p>No actors yet. Maybe add something?</p>
-                    : <ActorsList actors={actors}
-                                  onDeleteActor={handleDeleteActor}
-                    />}
-                {addingActor
-                    ? <ActorForm onActorSubmit={handleAddActor}
-                                 buttonLabel="Add an actor"
-                    />
-                    : <button onClick={() => setAddingActor(true)}>Add an actor</button>}
-
+                {loading && <div className="lds-ellipsis">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>}
+                {!loading && (
+                    <div>
+                        {actors.length === 0
+                            ? <p>No actors yet. Maybe add something?</p>
+                            : <ActorsList actors={actors}
+                                          onDeleteActor={handleDeleteActor}
+                            />}
+                        {addingActor
+                            ? <ActorForm onActorSubmit={handleAddActor}
+                                         buttonLabel="Add an actor"
+                            />
+                            : <button onClick={() => setAddingActor(true)}>Add an actor</button>}
+                    </div>
+                )}
             </div>
         </div>
 

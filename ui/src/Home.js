@@ -1,29 +1,50 @@
 import './App.css';
 import "milligram";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const Home = () => {
     const navigate = useNavigate();
 
     return (
-		<>
-                <div className="container">
-                    <div className="box top">
-                        <h5>
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                        </h5>
+        <>
+            <div className="container">
+                    <div className="box2">
+                        <ol>
+                            <li>
+                                <strong>Required:</strong>
+                                <ul>
+                                    <li>movies adding</li>
+                                    <li>movies removal</li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <strong>Nice to have:</strong>
+                                <ul>
+                                    <li>actors to movie assignment</li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <strong>Extra:</strong>
+                                <ul>
+                                    <li>displaying actors, adding, removal</li>
+                                    <li>router functionality</li>
+                                    <li>layout functionality</li>
+                                    <li>animation during loading response from server</li>
+                                </ul>
+                            </li>
+                        </ol>
                     </div>
-                    <div className="button-group">
-                          <button onClick={() => navigate("/Movies")}>Movies Base</button>
-                          <button onClick={() => navigate("/Actors")}>Actors Base</button>
-                    </div>
+                <div className="button-group">
+                    <button onClick={() => navigate("/Movies")}>Movies Base</button>
+                    <button onClick={() => navigate("/Actors")}>Actors Base</button>
                 </div>
 
+            </div>
+
         </>
-  );
+    );
 };
 
 export default Home;

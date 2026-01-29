@@ -6,21 +6,23 @@ import MovieActors from "./MovieActors";
 const MovieDetails = () => {
     const [movie, setMovies] = useState([]);
     const [actors, setActors] = useState([]);
-    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const {id} = useParams();
     const [isActorListOpen, setIsActorListOpen] = useState(false);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
         const fetchMovies = async () => {
+            setLoading(true);
             const response = await fetch(`/movies/${id}`);
             if (response.ok) {
                 const movies = await response.json();
                 setMovies(movies);
-                console.log(movies)
             }
         };
-        fetchMovies();
+        fetchMovies()
+            .finally(() => setLoading(false));
     }, [id]);
 
     useEffect(() => {
@@ -44,6 +46,7 @@ const MovieDetails = () => {
     };
 
     return (
+
         <div className="container">
             <div className="section-header">
                 <button className="back-button" onClick={() => navigate(-1)}>
@@ -52,52 +55,62 @@ const MovieDetails = () => {
                 </button>
 
                 <h2 className="section-title">Movie Details</h2>
+                {loading && <div className="lds-ellipsis">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>}
             </div>
 
-            <div className="box bottom">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Year</th>
-                        <th>Director</th>
-                        <th>Description</th>
-                        <th>Actors</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {movie && (
-                        <tr key={movie.id}>
-                            <td>{movie.title}</td>
-                            <td>{movie.year}</td>
-                            <td>{movie.director}</td>
-                            <td>{movie.description}</td>
-                            <td>
-                                {actors.length > 0
-                                    ? actors.map(a => `${a.name} ${a.surname}`).join(", ")
-                                    : "—"}
-                            </td>
-                            <td>
-                                <button className="button button-outline"
-                                        onClick={() => setIsActorListOpen(true)}>Add Actor
-                                </button>
-                            </td>
+            {!loading && (
+                <div className="box bottom">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Year</th>
+                            <th>Director</th>
+                            <th>Description</th>
+                            <th>Actors</th>
+                            <th>Actions</th>
                         </tr>
-                    )}
-                    </tbody>
-                </table>
-                <div>
+                        </thead>
 
-                    <MovieActors
-                        id={id}
-                        isOpen={isActorListOpen}
-                        onClose={() => setIsActorListOpen(false)}
-                        onUpdate={refreshActors}
-                    />
+                        <tbody>
+                        {movie && (
+                            <tr key={movie.id}>
+                                <td>{movie.title}</td>
+                                <td>{movie.year}</td>
+                                <td>{movie.director}</td>
+                                <td>{movie.description}</td>
+                                <td>
+                                    {actors.length > 0
+                                        ? actors.map(a => `${a.name} ${a.surname}`).join(", ")
+                                        : "—"}
+                                </td>
+                                <td>
+                                    <button className="button button-outline"
+                                            onClick={() => setIsActorListOpen(true)}>Add Actor
+                                    </button>
+                                </td>
+                            </tr>
+                        )}
+                        </tbody>
 
+                    </table>
+                    <div>
+
+                        <MovieActors
+                            id={id}
+                            isOpen={isActorListOpen}
+                            onClose={() => setIsActorListOpen(false)}
+                            onUpdate={refreshActors}
+                        />
+
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };

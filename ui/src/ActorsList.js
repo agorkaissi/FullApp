@@ -1,11 +1,23 @@
 import ActorListItem from "./ActorListItem";
 
 export default function ActorList(props) {
-    return <div>
-        <ul className="actors-list">
-            {props.actors.map(actor => <li>
-                <ActorListItem actor={actor} onDelete={() => props.onDeleteActor(actor)}/>
-            </li>)}
-        </ul>
-    </div>;
+    return <table className="actors-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {props.actors.map(actor => (
+                    <ActorListItem
+                        key={actor.id}
+                        actor={actor}
+                        onDelete={() => props.onDeleteActor(actor)}
+                    />
+                ))}
+            </tbody>
+        </table>
+    ;
 }

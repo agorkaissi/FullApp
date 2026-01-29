@@ -1,14 +1,17 @@
 export default function ActorListItem(props) {
     return (
-        <div>
-            <div>
-                <strong>Name:</strong> {props.actor.name}
-                {' '}
-                <strong>Surname:</strong> {props.actor.surname}
-                {' '}
-                <input className="button button-clear" onClick={props.onDelete} type="submit" value="Delete"/>
-            </div>
-        </div>
+        <tr>
+            <td>{props.actor.name}</td>
+            <td>{props.actor.surname}</td>
+            <td>
+                <input
+                    className="button button-clear"
+                    onClick={props.onDelete}
+                    type="button"
+                    value="Delete"
+                />
+            </td>
+        </tr>
     )
         ;
 }
