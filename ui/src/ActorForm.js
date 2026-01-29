@@ -6,6 +6,9 @@ export default function ActorForm(props) {
 
     function addActor(event) {
         event.preventDefault();
+        if (name.length < 2) {
+            return alert('Name is to short');
+        }
         props.onActorSubmit({name, surname});
         setName('');
         setSurname('');

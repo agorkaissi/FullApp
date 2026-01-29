@@ -243,3 +243,23 @@ footer {
     transform: translate(24px, 0);
   }
 }
+
+.container2 {
+  width: 800px;
+  margin: 0 auto;
+}
+
+.top-row2 {
+  display: flex;
+  gap: 20px;
+}
+
+.box3 {
+  flex: 1;
+  padding: 20px;
+  text-align: left;
+}
+
+.bottom-row2 .box {
+  margin-top: 20px;
+}
