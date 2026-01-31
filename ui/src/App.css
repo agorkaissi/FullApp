@@ -48,7 +48,7 @@ ul.actors-list {
 
 header {
     background-color: #f4f5f6;
-    color: #6c757d;
+    color: #9b4dca;
     padding: 1rem 0;
 }
 
@@ -64,6 +64,8 @@ main {
 
 footer {
     background-color: #f2f2f2;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
     color: #6c757d;
     padding: 1rem 0;
     text-align: center;
@@ -262,4 +264,44 @@ footer {
 
 .bottom-row2 .box {
   margin-top: 20px;
+}
+
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+}
+
+.social-icons a {
+  display: inline-flex;
+  color: #9b4dca;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+
+.box3 dl {
+  margin: 0;
+  padding: 0;
+}
+
+.box3 dt {
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: 0.25em;
+  font-weight: normal;
+}
+
+.box3 dt::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #9b4dca;
+  font-weight: bold;
 }
