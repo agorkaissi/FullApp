@@ -1,16 +1,19 @@
 import {useNavigate} from "react-router-dom";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useCallback} from "react";
 import {useParams} from "react-router-dom";
 import MovieActors from "./MovieActors";
 
 const MovieDetails = () => {
-    const [movie, setMovies] = useState([]);
+    const [movie, setMovies] = useState(null);
     const [actors, setActors] = useState([]);
     const [loading, setLoading] = useState(false);
     const {id} = useParams();
     const [isActorListOpen, setIsActorListOpen] = useState(false);
     const navigate = useNavigate();
 
+    const backToMovies = () => {
+        navigate("/movies");
+    };
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -45,11 +48,29 @@ const MovieDetails = () => {
         }
     };
 
+    const refreshMovies = useCallback(async () => {
+        setLoading(true);
+        try {
+            const response = await fetch(`/movies/${id}`);
+            if (response.ok) {
+                const data = await response.json();
+                setMovies(data);
+            }
+        } finally {
+            setLoading(false);
+        }
+    }, [id]);
+
+    useEffect(() => {
+        refreshMovies();
+    }, [refreshMovies]);
+
+
     return (
 
         <div className="container">
             <div className="section-header">
-                <button className="back-button" onClick={() => navigate(-1)}>
+                <button className="back-button" onClick={backToMovies}>
                     <span className="back-arrow">←</span>
                     <span className="back-text">Back</span>
                 </button>
