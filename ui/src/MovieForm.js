@@ -8,7 +8,7 @@ export default function MovieForm(props) {
 
     function addMovie(event) {
         event.preventDefault();
-        if (title.length < 5) {
+        if (title.length < 3) {
             return alert('Title is too short');
         }
         props.onMovieSubmit({title, year, director, description});
