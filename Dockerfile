@@ -8,7 +8,7 @@ COPY ui/public ./public
 RUN npm run build
 
 # Etap 2: backend
-FROM python:3.9
+FROM python:3.14.2
 
 # Instalacja bibliotek systemowych wymaganych do kompilacji niektórych pakietów Python
 RUN apt-get update && apt-get install -y \
