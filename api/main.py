@@ -20,6 +20,11 @@ app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="../ui/build/static", check_dir=False), name="static")
 
+@app.get("/")
+def serve_react_app():
+   return FileResponse("../ui/build/index.html")
+
+
 MOVIE_FIELDS = ["id", "title", "director", "year", "description"]
 ACTOR_FIELDS = ["id", "name", "surname"]
 
