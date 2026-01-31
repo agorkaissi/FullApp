@@ -55,6 +55,8 @@ const MovieDetails = () => {
                 </button>
 
                 <h2 className="section-title">Movie Details</h2>
+            </div>
+            <div>
                 {loading && <div className="lds-ellipsis">
                     <div></div>
                     <div></div>
@@ -62,6 +64,7 @@ const MovieDetails = () => {
                     <div></div>
                 </div>}
             </div>
+
 
             {!loading && (
                 <div className="box bottom">
@@ -100,14 +103,12 @@ const MovieDetails = () => {
 
                     </table>
                     <div>
-
                         <MovieActors
                             id={id}
                             isOpen={isActorListOpen}
                             onClose={() => setIsActorListOpen(false)}
                             onUpdate={refreshActors}
                         />
-
                     </div>
                 </div>
             )}
