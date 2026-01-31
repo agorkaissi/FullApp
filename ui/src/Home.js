@@ -15,10 +15,12 @@ const Home = () => {
                             <dt>movies adding</dt>
                             <dt>movies removal</dt>
                         </dl>
+                        <br />
                         <strong>Nice to have (4.0):</strong>
                         <dl>
                             <dt>actors to movie assignment</dt>
                         </dl>
+                        <br />
                         <strong>Extra (5.0):</strong>
                         <dl>
                             <dt>displaying actors, adding, removal</dt>
