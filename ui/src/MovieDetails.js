@@ -93,7 +93,11 @@ const MovieDetails = () => {
                                 <td>{movie.director}</td>
                                 <td>{movie.description}</td>
                                 <td>
-                                    {loading2 && <div className="lds-hourglass"></div>}
+                                    {loading2 && <div className="lds-facebook">
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                    </div>}
 
                                     {!loading2 && (
                                         actors.length > 0

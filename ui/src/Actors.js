@@ -2,6 +2,7 @@ import {useNavigate} from "react-router-dom";
 import {useState, useEffect} from "react";
 import ActorForm from "./ActorForm";
 import ActorsList from "./ActorsList";
+import {Modal} from 'antd';
 
 const Actors = () => {
     const [actors, setActors] = useState([]);
@@ -12,6 +13,27 @@ const Actors = () => {
 
     const backHome = () => {
         navigate("/");
+    };
+
+    const confirmDeleteActor = (actor) => {
+        Modal.confirm({
+            title: "Are you sure you want to remove this actor?",
+            className: "milligram-confirm",
+            content: `${actor.name} ${actor.surname}`,
+            okText: "Yes",
+            cancelText: "No",
+            okType: "danger",
+            style: { border: "2px solid #9b4dca", borderRadius: "6px" },
+            okButtonProps: {
+                className: "button button-outline"
+            },
+            cancelButtonProps: {
+                className: "button"
+            },
+            onOk() {
+                return handleDeleteActor(actor);
+            },
+        });
     };
 
     useEffect(() => {
@@ -42,11 +64,20 @@ const Actors = () => {
     }
 
     async function handleDeleteActor(actor) {
-        const url = `/actors/${actor.id}`;
-        const response = await fetch(url, {method: 'DELETE'});
-        if (response.ok) {
-            const nextActors = actors.filter(a => a !== actor);
-            setActors(nextActors);
+        try {
+            const url = `/actors/${actor.id}`;
+            const response = await fetch(url, {method: "DELETE"});
+
+            if (!response.ok) {
+                throw new Error("Delete failed");
+            }
+
+            setActors(prev => prev.filter(a => a.id !== actor.id));
+        } catch (err) {
+            Modal.error({
+                title: "Error",
+                content: "Actor removal not finalised",
+            });
         }
     }
 
@@ -74,7 +105,7 @@ const Actors = () => {
                         {actors.length === 0
                             ? <p>No actors yet. Maybe add something?</p>
                             : <ActorsList actors={actors}
-                                          onDeleteActor={handleDeleteActor}
+                                          onDeleteActor={confirmDeleteActor}
                             />}
                         {addingActor
                             ? <ActorForm onActorSubmit={handleAddActor}

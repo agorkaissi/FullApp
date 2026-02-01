@@ -2,6 +2,7 @@ import {useNavigate} from "react-router-dom";
 import {useState, useEffect} from "react";
 import MovieForm from "./MovieForm";
 import MoviesList from "./MoviesList";
+import {Modal} from "antd";
 
 const Movies = () => {
     const [movies, setMovies] = useState([]);
@@ -11,6 +12,27 @@ const Movies = () => {
 
     const backHome = () => {
         navigate("/");
+    };
+
+    const confirmDeleteMovie = (movie) => {
+        Modal.confirm({
+            title: "Are you sure you want to remove this movie?",
+            className: "milligram-confirm",
+            content: `${movie.title}`,
+            okText: "Yes",
+            cancelText: "No",
+            okType: "danger",
+            style: {border: "2px solid #9b4dca", borderRadius: "6px"},
+            okButtonProps: {
+                className: "button button-outline"
+            },
+            cancelButtonProps: {
+                className: "button"
+            },
+            onOk() {
+                return handleDeleteMovie(movie);
+            },
+        });
     };
 
     useEffect(() => {
@@ -42,11 +64,21 @@ const Movies = () => {
     }
 
     async function handleDeleteMovie(movie) {
-        const url = `/movies/${movie.id}`;
-        const response = await fetch(url, {method: 'DELETE'});
-        if (response.ok) {
-            const nextMovies = movies.filter(m => m !== movie);
+        try {
+            const url = `/movies/${movie.id}`;
+            const response = await fetch(url, {method: 'DELETE'});
+
+            if (!response.ok) {
+                throw new Error("Delete failed");
+            }
+            const nextMovies = movies.filter(m => m.id !== movie.id);
             setMovies(nextMovies);
+
+        } catch (err) {
+            Modal.error({
+                title: "Error",
+                content: "Movie removal not finalised",
+            });
         }
     }
 
@@ -75,7 +107,7 @@ const Movies = () => {
                         {movies.length === 0
                             ? <p>No movies yet. Maybe add something?</p>
                             : <MoviesList movies={movies}
-                                          onDeleteMovie={handleDeleteMovie}
+                                          onDeleteMovie={confirmDeleteMovie}
                             />}
                         {addingMovie
                             ? <MovieForm onMovieSubmit={handleAddMovie}
