@@ -22,7 +22,7 @@ const Layout = () => {
             </main>
             <footer>
                 <div className="container">
-                    <strong>&#169; 2026 My Movie Database. All rights reserved</strong>
+                    <strong>&#169; 2026 My Movies Database. All rights reserved</strong>
                     <div className="social-icons">
                         <a href="https://x.com/siepomaga" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
                             <svg className="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

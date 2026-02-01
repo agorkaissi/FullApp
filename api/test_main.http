@@ -24,7 +24,7 @@ Content-Type: application/json
 
 ###
 # remove movie '/movies/{movie_id}' test
-DELETE http://127.0.0.1:8000/movies/10
+DELETE http://127.0.0.1:8000/movies/8
 Accept: application/json
 
 ###

@@ -4,7 +4,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import Any
 from db import get_db, db_execute, row_to_dict
-from common import get_all, get_one, create, update_put, update_patch, delete
+from common import get_all, get_one, create, update_put, update_patch, delete, delete_2
 import logging
 
 logging.basicConfig(
@@ -43,6 +43,7 @@ def add_movie(params: dict[str, Any], db=Depends(get_db)):
 
 @app.delete("/movies/{movie_id}")
 def remove_movie(movie_id: int, db=Depends(get_db)):
+    delete_2(db, "movie_actor_through", 'movie_id', movie_id, "Movie")
     delete(db, "movie", movie_id, "Movie")
     return {"message": "Movie deleted successfully"}
 
@@ -79,6 +80,7 @@ def add_actor(params: dict[str, Any], db=Depends(get_db)):
 
 @app.delete("/actors/{actor_id}")
 def remove_actor(actor_id: int, db=Depends(get_db)):
+    delete_2(db, "movie_actor_through", 'actor_id', actor_id, "Actor")
     delete(db, "actor", actor_id, "Actor")
     return {"message": "Actor deleted successfully"}
 

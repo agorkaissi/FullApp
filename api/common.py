@@ -60,6 +60,13 @@ def delete(db, table: str, entity_id: int, name: str):
             f"{name} not found"
         )
 
+def delete_2(db, table: str, id: str, entity_id: int, name: str):
+    cursor = db_execute(
+        db,
+        f"DELETE FROM {table} WHERE {id} = ?",
+        (entity_id,)
+    )
+
 def updatable_fields(fields: list[str]):
     return [f for f in fields if f != "id"]
 

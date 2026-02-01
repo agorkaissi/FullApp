@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import {useState, useEffect, useCallback} from "react";
+import {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
 import MovieActors from "./MovieActors";
 
@@ -7,6 +7,7 @@ const MovieDetails = () => {
     const [movie, setMovies] = useState(null);
     const [actors, setActors] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [loading2, setLoading2] = useState(false);
     const {id} = useParams();
     const [isActorListOpen, setIsActorListOpen] = useState(false);
     const navigate = useNavigate();
@@ -30,6 +31,7 @@ const MovieDetails = () => {
 
     useEffect(() => {
         const fetchActors = async () => {
+            setLoading2(true);
             if (!movie) return;
             const response = await fetch(`/movies/${id}/actors`);
             if (response.ok) {
@@ -37,7 +39,8 @@ const MovieDetails = () => {
                 setActors(data);
             }
         };
-        fetchActors();
+        fetchActors()
+            .finally(() => setLoading2(false));
     }, [movie, id]);
 
     const refreshActors = async () => {
@@ -47,24 +50,6 @@ const MovieDetails = () => {
             setActors(data);
         }
     };
-
-    const refreshMovies = useCallback(async () => {
-        setLoading(true);
-        try {
-            const response = await fetch(`/movies/${id}`);
-            if (response.ok) {
-                const data = await response.json();
-                setMovies(data);
-            }
-        } finally {
-            setLoading(false);
-        }
-    }, [id]);
-
-    useEffect(() => {
-        refreshMovies();
-    }, [refreshMovies]);
-
 
     return (
 
@@ -85,7 +70,6 @@ const MovieDetails = () => {
                     <div></div>
                 </div>}
             </div>
-
 
             {!loading && (
                 <div className="box bottom">
@@ -109,9 +93,13 @@ const MovieDetails = () => {
                                 <td>{movie.director}</td>
                                 <td>{movie.description}</td>
                                 <td>
-                                    {actors.length > 0
-                                        ? actors.map(a => `${a.name} ${a.surname}`).join(", ")
-                                        : "—"}
+                                    {loading2 && <div className="lds-hourglass"></div>}
+
+                                    {!loading2 && (
+                                        actors.length > 0
+                                            ? actors.map(a => `${a.name} ${a.surname}`).join(", ")
+                                            : "—"
+                                    )}
                                 </td>
                                 <td>
                                     <button className="button button-outline"
